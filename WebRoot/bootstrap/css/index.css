@@ -1,0 +1,28 @@
+.masthead-bg {
+	text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4), 0 0 30px rgba(0, 0, 0, 0.075);
+	background-repeat: repeat-x;
+	background-image: -webkit-linear-gradient(45deg, #020031, #6d3353);
+	background-image: -moz-linear-gradient(45deg, #020031, #6d3353);
+	background-image: linear-gradient(45deg, #020031, #6d3353)
+}
+
+.masthead-bg:after {
+	content: '';
+	display: block;
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background: url(../img/bs-docs-masthead-pattern.png) repeat center
+		center;
+	opacity: .4
+}
+
+.text-white {
+	color: white;
+}
+
+.index-bg {
+	background: url("../../images/test.png");
+}

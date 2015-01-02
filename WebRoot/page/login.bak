@@ -1,0 +1,104 @@
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+<%@include file="CommonPage.jsp"%>
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title><s:text name="COMMON_TITLE"></s:text>-<s:text name="TITLE.LOGIN"></s:text></title>
+    
+	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+	<meta http-equiv="expires" content="0">    
+	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+	<meta http-equiv="description" content="This is my page">
+	<script type="text/javascript">
+		//在session失效时，使iframe的父窗口跳转登录页面,而不是iframe
+		if (window != top) {
+			top.location.href = location.href; 
+		}
+		var root="<%=root%>";
+		/**
+		 * 执行reset操作
+		 */
+		function doReset() {
+			$("#userName").val("");
+			$("#passWord").val("");
+		}
+	
+		/**
+		 * Ajax执行登录操作
+		 * @return
+		 */
+		function doLogin() {
+			var validateResult = true;
+			//easyui 表单验证
+			$('#loginTable input').each(function() {
+				if ($(this).attr('required') || $(this).attr('validType')) {
+					if (!$(this).validatebox('isValid')) {
+						//如果验证不通过，则返回false
+						validateResult = false;
+						return;
+					}
+				}
+			});
+			if (validateResult == false) {
+				//如果验证不通过，则不执行登录操作
+				return;
+			}
+	
+			$('#loginForm').submit();
+		}
+		//设置弹出框的属性
+		function setDialog(){
+			$('#login').dialog({
+				title : '用户登录',
+				left : 750,
+				top : 200,
+				modal: false,         //模式窗口：窗口背景不可操作
+				collapsible : false,  //可折叠，点击窗口右上角折叠图标将内容折叠起来
+				resizable : false,    //可拖动边框大小
+				closable : false,     //不提供关闭窗口按钮
+				shadow : false
+			});
+		}
+		
+		$(function() {
+			setDialog();
+			//焦点
+			$("#userName").focus();
+		});
+	</script>
+</head>
+ <body class="login-body" onkeydown="if(event.keyCode==13){doLogin();}">
+	<div id="login" style=" width: 350px; height: 200px;">
+		<div style="padding:10px 0 10px 80px">
+			<form id="loginForm" method="post" action="<%=root%>/main/login.do">  
+	            <table>  
+	                <tr>  
+	                    <td>用户名:</td>  
+	                    <td><input class="easyui-validatebox" type="text" id="userName" maxlength="256" name="form.username" data-options="required:true"></input></td>  
+	                </tr>  
+	                <tr>  
+	                    <td>密码:</td>  
+	                    <td><input class="easyui-validatebox" type="password" id="passWord" maxlength="256" name="form.password" data-options="required:true"></input></td>  
+	                </tr> 
+	                <tr>
+						<td colspan="2" align="center">
+							<a href="#" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-start'" 
+								onclick="doLogin();">确定</a>
+							<a href="#" class="easyui-linkbutton"   data-options="plain:true,iconCls:'icon-reload'" 
+								onclick="doReset();">重置</a>
+						</td>
+					</tr>
+	                <tr>
+						<td colspan="2" style="color: red; font-weight:bold;">${LOGIN_ERROR}</td>
+					</tr>  
+	            </table>  
+	        </form>  
+		</div>
+	</div>
+</body>
+</html>

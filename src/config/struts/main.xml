@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN"
+    "http://struts.apache.org/dtds/struts-2.1.7.dtd">
+<struts>
+	<package name="main" namespace="/main" extends="json-default">
+		<action name="goWelcome" class="MainAction" method="goWelcome">
+			<result name="success" type="redirect">../page/Welcome.jsp</result>
+		</action>
+
+		<!-- 用户管理  -->
+		<action name="goLogin" class="MainAction" method="goLogin">
+			<result name="success" type="redirect">../page/Login.jsp</result>
+		</action>
+
+		<action name="login" class="MainAction" method="login">
+			<result name="success" type="redirect">../page/Main.jsp</result>
+			<result name="input" type="redirect">../page/Login.jsp</result>
+		</action>
+		
+		<action name="doQueryPwd" class="MainAction" method="doQueryPwd">
+			<result name="success" type="json">
+				<param name="root">user</param>
+				<param name="contentType">text/html</param>
+			</result>
+		</action>
+		
+		<action name="doUpdatePassword" class="MainAction" method="doUpdatePassword">
+			<result name="success" type="json">
+				<param name="root">code</param>
+				<param name="contentType">text/html</param>
+			</result>
+		</action>
+		
+		<action name="goLoginOut" class="MainAction" method="goLoginOut">
+			<result name="success" type="redirect">../page/Login.jsp</result>
+			<result name="input" type="redirect">../page/Login.jsp</result>
+		</action>
+		
+		<action name="goUserManager" class="MainAction" method="goUserManager">
+			<result name="success" type="redirect">../page/UserManager.jsp</result>
+		</action>
+		
+		<action name="doAddUser" class="MainAction" method="doAddUser">
+			<result name="success" type="json">
+				<param name="root">code</param>
+				<param name="contentType">text/html</param>
+			</result>
+		</action>
+		<action name="doUpdateUser" class="MainAction" method="doUpdateUser">
+			<result name="success" type="json">
+				<param name="root">code</param>
+				<param name="contentType">text/html</param>
+			</result>
+		</action>
+		<action name="doDeleteUser" class="MainAction" method="doDeleteUser">
+			<result name="success" type="json">
+				<param name="root">code</param>
+				<param name="contentType">text/html</param>
+			</result>
+		</action>
+		
+		<action name="queryUserByJson" class="MainAction" method="queryUserByJson">
+			<result name="success" type="json">
+				<param name="root">userMap</param>
+				<param name="contentType">text/html</param>
+			</result>
+		</action>
+		
+		<action name="queryUserDataGridByJson" class="MainAction" method="queryUserDataGridByJson">
+			<result name="success" type="json">
+				<param name="root">userGrid</param>
+				<param name="contentType">text/html</param>
+			</result>
+		</action>
+		
+		<action name="queryRoleListByJson" class="MainAction" method="queryRoleListByJson">
+			<result name="success" type="json">
+				<param name="root">roleCombobox</param>
+				<param name="contentType">text/html</param>
+			</result>
+		</action>
+		
+		<action name="queryDictionaryByJson" class="MainAction" method="queryDictionaryByJson">
+			<result name="success" type="json">
+				<param name="root">dictionaryList</param>
+				<param name="contentType">text/html</param>
+			</result>
+		</action>
+
+		<!-- 门牌管理  -->
+		<action name="goHouseNumberManager" class="MainAction"
+			method="goHouseNumberManager">
+			<result name="success" type="redirect">../page/HouseNumberManager.jsp
+			</result>
+		</action>
+		<action name="goHouseNumberImport" class="MainAction"
+			method="goHouseNumberImport">
+			<result name="success" type="redirect">../page/HouseNumberImport.jsp
+			</result>
+		</action>
+		
+		<action name="doAddHouseNumber" class="MainAction" method="doAddHouseNumber">
+			<result name="success" type="json">
+				<param name="root">code</param>
+				<param name="contentType">text/html</param>
+			</result>
+		</action>
+		<action name="doUpdateHouseNumber" class="MainAction" method="doUpdateHouseNumber">
+			<result name="success" type="json">
+				<param name="root">code</param>
+				<param name="contentType">text/html</param>
+			</result>
+		</action>
+		<action name="doDeleteHouseNumber" class="MainAction" method="doDeleteHouseNumber">
+			<result name="success" type="json">
+				<param name="root">code</param>
+				<param name="contentType">text/html</param>
+			</result>
+		</action>
+		
+		<action name="queryHouseNumberListByJson" class="MainAction" method="queryHouseNumberListByJson">
+			<result name="success" type="json">
+				<param name="root">houseNumberGrid</param>
+				<param name="contentType">text/html</param>
+			</result>
+		</action>
+		
+		<action name="queryHouseNumberByJson" class="MainAction" method="queryHouseNumberByJson">
+			<result name="success" type="json">
+				<param name="root">houseMap</param>
+				<param name="contentType">text/html</param>
+			</result>
+		</action>
+		
+		<action name="doHouseNumberImport" class="MainAction"
+			method="doHouseNumberImport">
+			<!-- 动态设置savePath的属性值 -->
+			<result name="success" type="json">
+				<param name="root">code</param>
+				<param name="contentType">text/html</param>
+			</result>
+			<result name="input" type="json">
+				<param name="root">code</param>
+				<param name="contentType">text/html</param>
+			</result>
+		</action>
+		
+		<action name="doHouseNumberExport" class="MainAction" method="doHouseNumberExport">
+			<result name="success" type="stream">  
+               <param name="contentType">text/plain</param>  
+               <param name="contentDisposition">attachment;fileName="${fileName}"</param>  
+               <param name="inputName">ins</param>  
+               <param name="bufferSize">1024</param>  
+           </result> 
+		</action>
+		
+		<action name="goPrint" class="MainAction" method="goPrint">
+			<result name="success" type="stream">  
+               <param name="contentType">application/pdf</param>  
+               <param name="contentDisposition">attachment;fileName="${fileName}"</param>  
+               <param name="inputName">ins</param>  
+               <param name="bufferSize">1024</param>  
+           </result> 
+		</action>
+		
+		<action name="downloadFile" class="FileDownloadAction">
+			<result name="success" type="stream">  
+               <param name="contentType">text/plain</param>  
+               <param name="contentDisposition">attachment;fileName="${fileName}"</param>  
+               <param name="inputName">ins</param>  
+               <param name="bufferSize">1024</param>  
+           </result> 
+		</action>
+	</package>
+</struts>
